@@ -1,17 +1,24 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { RouterProvider, createRouter } from '@tanstack/react-router'
 import './index.css'
 
-function App() {
-  return (
-    <div className="min-h-screen flex items-center justify-center">
-      <h1 className="text-3xl font-bold">Todo App</h1>
-    </div>
-  )
+// Import the auto-generated route tree
+import { routeTree } from './routeTree.gen'
+
+// Create the router instance
+const router = createRouter({ routeTree })
+
+// Register the router for type safety
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
 }
 
+// Render the app
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>,
 )
