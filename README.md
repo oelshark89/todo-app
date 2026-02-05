@@ -1,4 +1,4 @@
-# Aurora Todo App
+# Todo App
 
 A beautiful, modern Todo application built with React, TanStack Router, and an Aurora-themed glassmorphism design.
 
