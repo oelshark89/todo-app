@@ -1,6 +1,10 @@
 # Todo App
 
-A modern Todo application built with React, TanStack Router, and a glassmorphism design.
+A beautiful, modern Todo application built with React, TanStack Router, and glassmorphism design.
+
+## 🚀 Live Demo
+
+The app is deployed and accessible at: [https://todo-app-deploy-peach.vercel.app/](https://todo-app-deploy-peach.vercel.app/)
 
 ## Features
 
@@ -92,7 +96,7 @@ todo-app/
 │   │   ├── todo/
 │   │   │   ├── TodoCard.tsx       # Todo list item
 │   │   │   ├── SearchBar.tsx      # Search input component
-│   │   │   └── EmptyState.tsx     # Empty state placeholder
+│   │   │   └─��� EmptyState.tsx     # Empty state placeholder
 │   │   └── ui/
 │   │       └── ConfirmDialog.tsx  # Confirmation modal
 │   │
@@ -102,7 +106,7 @@ todo-app/
 │   ├── lib/
 │   │   └── utils.ts               # Utility functions (cn)
 │   │
-│   ├── index.css                  # Global styles & theme
+│   ├── index.css                  # Global styles theme
 │   ├── main.tsx                   # App entry point
 │   └── routeTree.gen.ts           # Auto-generated route tree
 │
@@ -155,7 +159,7 @@ todo-app/
 
 ## Design System
 
-### Theme Colors
+###Theme Colors
 
 | Color | Light Mode | Dark Mode |
 |-------|------------|-----------|
@@ -199,7 +203,3 @@ npm run build    # Build for production
 npm run preview  # Preview production build
 npm run lint     # Run ESLint
 ```
-
-## License
-
-MIT
