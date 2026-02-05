@@ -2,6 +2,10 @@
 
 A beautiful, modern Todo application built with React, TanStack Router, and glassmorphism design.
 
+## 🚀 Live Demo
+
+The app is deployed and accessible at: [https://todo-app-deploy-peach.vercel.app/](https://todo-app-deploy-peach.vercel.app/)
+
 ## Features
 
 - **PIN Authentication**: Welcome screen with 4-digit PIN login (PIN: 1234)
@@ -92,7 +96,7 @@ todo-app/
 │   │   ├── todo/
 │   │   │   ├── TodoCard.tsx       # Todo list item
 │   │   │   ├── SearchBar.tsx      # Search input component
-│   │   │   └── EmptyState.tsx     # Empty state placeholder
+│   │   │   └─��� EmptyState.tsx     # Empty state placeholder
 │   │   └── ui/
 │   │       └── ConfirmDialog.tsx  # Confirmation modal
 │   │
