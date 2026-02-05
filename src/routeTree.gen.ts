@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WelcomeRouteImport } from './routes/welcome'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CategoriesIndexRouteImport } from './routes/categories/index'
 import { Route as TodosNewRouteImport } from './routes/todos/new'
@@ -20,6 +22,16 @@ import { Route as TodosTodoIdEditRouteImport } from './routes/todos/$todoId/edit
 const WelcomeRoute = WelcomeRouteImport.update({
   id: '/welcome',
   path: '/welcome',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -55,6 +67,8 @@ const TodosTodoIdEditRoute = TodosTodoIdEditRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/profile': typeof ProfileRoute
+  '/settings': typeof SettingsRoute
   '/welcome': typeof WelcomeRoute
   '/categories/$categoryId': typeof CategoriesCategoryIdRoute
   '/todos/new': typeof TodosNewRoute
@@ -64,6 +78,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/profile': typeof ProfileRoute
+  '/settings': typeof SettingsRoute
   '/welcome': typeof WelcomeRoute
   '/categories/$categoryId': typeof CategoriesCategoryIdRoute
   '/todos/new': typeof TodosNewRoute
@@ -74,6 +90,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/profile': typeof ProfileRoute
+  '/settings': typeof SettingsRoute
   '/welcome': typeof WelcomeRoute
   '/categories/$categoryId': typeof CategoriesCategoryIdRoute
   '/todos/new': typeof TodosNewRoute
@@ -85,6 +103,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/profile'
+    | '/settings'
     | '/welcome'
     | '/categories/$categoryId'
     | '/todos/new'
@@ -94,6 +114,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/profile'
+    | '/settings'
     | '/welcome'
     | '/categories/$categoryId'
     | '/todos/new'
@@ -103,6 +125,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/profile'
+    | '/settings'
     | '/welcome'
     | '/categories/$categoryId'
     | '/todos/new'
@@ -113,6 +137,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProfileRoute: typeof ProfileRoute
+  SettingsRoute: typeof SettingsRoute
   WelcomeRoute: typeof WelcomeRoute
   CategoriesCategoryIdRoute: typeof CategoriesCategoryIdRoute
   TodosNewRoute: typeof TodosNewRoute
@@ -128,6 +154,20 @@ declare module '@tanstack/react-router' {
       path: '/welcome'
       fullPath: '/welcome'
       preLoaderRoute: typeof WelcomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -177,6 +217,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProfileRoute: ProfileRoute,
+  SettingsRoute: SettingsRoute,
   WelcomeRoute: WelcomeRoute,
   CategoriesCategoryIdRoute: CategoriesCategoryIdRoute,
   TodosNewRoute: TodosNewRoute,
