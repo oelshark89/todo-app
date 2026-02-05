@@ -1,34 +1,36 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import { useState } from 'react'
-import { format } from 'date-fns'
-import { ArrowLeft, Calendar, Pencil, Trash2, Check } from 'lucide-react'
-import { useTodoStore } from '../../../stores/todoStore'
-import { useCategoryStore } from '../../../stores/categoryStore'
-import { ConfirmDialog } from '../../../components/ui/ConfirmDialog'
-import { EmptyState } from '../../../components/todo/EmptyState'
-import { cn } from '../../../lib/utils'
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { format } from "date-fns";
+import { ArrowLeft, Calendar, Pencil, Trash2, Check } from "lucide-react";
+import { useTodoStore } from "../../../stores/todoStore";
+import { useCategoryStore } from "../../../stores/categoryStore";
+import { ConfirmDialog } from "../../../components/ui/ConfirmDialog";
+import { EmptyState } from "../../../components/todo/EmptyState";
+import { cn } from "../../../lib/utils";
+import { toast } from "sonner";
 
-// Create the route for "/todos/:todoId"
-export const Route = createFileRoute('/todos/$todoId/')({
+export const Route = createFileRoute("/todos/$todoId/")({
   component: TodoDetailPage,
-})
+});
 
 function TodoDetailPage() {
-  const navigate = useNavigate()
-  const { todoId } = Route.useParams()
-  const { getTodoById, deleteTodo, toggleTodo } = useTodoStore()
-  const { getCategoryById } = useCategoryStore()
+  const navigate = useNavigate();
+  const { todoId } = Route.useParams();
+  const getTodoById = useTodoStore((state) => state.getTodoById);
+  const deleteTodo = useTodoStore((state) => state.deleteTodo);
+  const toggleTodo = useTodoStore((state) => state.toggleTodo);
+  const getCategoryById = useCategoryStore((state) => state.getCategoryById);
 
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-  const todo = getTodoById(todoId)
-  const category = todo ? getCategoryById(todo.categoryId) : undefined
+  const todo = getTodoById(todoId);
+  const category = todo ? getCategoryById(todo.categoryId) : undefined;
 
-  // Handle delete
   const handleDelete = () => {
-    deleteTodo(todoId)
-    navigate({ to: '/' })
-  }
+    deleteTodo(todoId);
+    toast.success("Task deleted successfully");
+    navigate({ to: "/" });
+  };
 
   // Handle case where todo doesn't exist
   if (!todo) {
@@ -36,7 +38,7 @@ function TodoDetailPage() {
       <div className="page-transition min-h-screen pb-24">
         <header className="sticky top-0 z-10 glass-card rounded-none border-x-0 border-t-0 p-4">
           <button
-            onClick={() => navigate({ to: '/' })}
+            onClick={() => navigate({ to: "/" })}
             className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
@@ -50,7 +52,7 @@ function TodoDetailPage() {
           />
         </main>
       </div>
-    )
+    );
   }
 
   return (
@@ -59,7 +61,7 @@ function TodoDetailPage() {
       <header className="sticky top-0 z-10 glass-card rounded-none border-x-0 border-t-0 p-4">
         <div className="flex items-center justify-between">
           <button
-            onClick={() => navigate({ to: '/' })}
+            onClick={() => navigate({ to: "/" })}
             className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
@@ -70,7 +72,7 @@ function TodoDetailPage() {
           <div className="flex gap-2">
             <button
               onClick={() =>
-                navigate({ to: '/todos/$todoId/edit', params: { todoId } })
+                navigate({ to: "/todos/$todoId/edit", params: { todoId } })
               }
               className="p-2 rounded-lg hover:bg-primary/10 transition-colors"
               aria-label="Edit task"
@@ -95,11 +97,15 @@ function TodoDetailPage() {
           {/* Completion toggle */}
           <div className="flex items-start gap-4 mb-4">
             <button
-              onClick={() => toggleTodo(todoId)}
-              className={cn(
-                'todo-checkbox mt-1',
-                todo.completed && 'checked'
-              )}
+              onClick={() => {
+                toggleTodo(todoId);
+                toast.success(
+                  todo.completed
+                    ? "Task marked as incomplete"
+                    : "Task completed!",
+                );
+              }}
+              className={cn("todo-checkbox mt-1", todo.completed && "checked")}
             >
               {todo.completed && <Check className="w-4 h-4 text-white" />}
             </button>
@@ -108,8 +114,8 @@ function TodoDetailPage() {
               {/* Title */}
               <h1
                 className={cn(
-                  'text-2xl font-bold text-foreground',
-                  todo.completed && 'line-through text-muted-foreground'
+                  "text-2xl font-bold text-foreground",
+                  todo.completed && "line-through text-muted-foreground",
                 )}
               >
                 {todo.title}
@@ -118,7 +124,7 @@ function TodoDetailPage() {
               {/* Category and date */}
               <div className="flex items-center gap-3 mt-2 flex-wrap">
                 {category && (
-                  <span className={cn('category-badge', category.color)}>
+                  <span className={cn("category-badge", category.color)}>
                     {category.name}
                   </span>
                 )}
@@ -126,7 +132,7 @@ function TodoDetailPage() {
                 {todo.dueDate && (
                   <span className="flex items-center gap-1 text-sm text-muted-foreground">
                     <Calendar className="w-4 h-4" />
-                    Due {format(new Date(todo.dueDate), 'MMMM d, yyyy')}
+                    Due {format(new Date(todo.dueDate), "MMMM d, yyyy")}
                   </span>
                 )}
               </div>
@@ -148,7 +154,7 @@ function TodoDetailPage() {
           {/* Created date */}
           <div className="mt-6 pt-6 border-t border-border">
             <p className="text-xs text-muted-foreground">
-              Created {format(new Date(todo.createdAt), 'MMMM d, yyyy')}
+              Created {format(new Date(todo.createdAt), "MMMM d, yyyy")}
             </p>
           </div>
         </div>
@@ -156,16 +162,23 @@ function TodoDetailPage() {
         {/* Quick actions */}
         <div
           className="flex gap-3 animate-fade-in"
-          style={{ animationDelay: '100ms' }}
+          style={{ animationDelay: "100ms" }}
         >
           <button
-            onClick={() => toggleTodo(todoId)}
+            onClick={() => {
+              toggleTodo(todoId);
+              toast.success(
+                todo.completed
+                  ? "Task marked as incomplete"
+                  : "Task completed!",
+              );
+            }}
             className={cn(
-              'flex-1',
-              todo.completed ? 'btn-secondary' : 'btn-primary'
+              "flex-1",
+              todo.completed ? "btn-secondary" : "btn-primary",
             )}
           >
-            {todo.completed ? 'Mark Incomplete' : 'Mark Complete'}
+            {todo.completed ? "Mark Incomplete" : "Mark Complete"}
           </button>
         </div>
       </main>
@@ -182,5 +195,5 @@ function TodoDetailPage() {
         />
       )}
     </div>
-  )
+  );
 }
