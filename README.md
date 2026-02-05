@@ -1,6 +1,6 @@
 # Todo App
 
-A beautiful, modern Todo application built with React, TanStack Router, and an Aurora-themed glassmorphism design.
+A beautiful, modern Todo application built with React, TanStack Router, and glassmorphism design.
 
 ## Features
 
@@ -102,7 +102,7 @@ todo-app/
 │   ├── lib/
 │   │   └── utils.ts               # Utility functions (cn)
 │   │
-│   ├── index.css                  # Global styles & Aurora theme
+│   ├── index.css                  # Global styles theme
 │   ├── main.tsx                   # App entry point
 │   └── routeTree.gen.ts           # Auto-generated route tree
 │
@@ -155,7 +155,7 @@ todo-app/
 
 ## Design System
 
-### Aurora Theme Colors
+###Theme Colors
 
 | Color | Light Mode | Dark Mode |
 |-------|------------|-----------|
