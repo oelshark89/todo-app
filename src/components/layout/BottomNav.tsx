@@ -1,10 +1,11 @@
 import { Link, useLocation } from '@tanstack/react-router'
-import { Home } from 'lucide-react'
+import { Home, FolderOpen } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
 // Navigation items configuration
 const navItems = [
   { path: '/', icon: Home, label: 'Home' },
+  { path: '/categories', icon: FolderOpen, label: 'Categories' },
 ] as const
 
 export function BottomNav() {
