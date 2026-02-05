@@ -1,0 +1,18 @@
+@layer components {
+  /* Custom Todo Checkbox */
+  .todo-checkbox {
+    @apply w-6 h-6 rounded-[100px] border-2 flex items-center justify-center cursor-pointer transition-all duration-300;
+    border-color: hsl(var(--primary) / 0.5);
+  }
+
+  .todo-checkbox:hover {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 15px hsl(var(--aurora-purple) / 0.3);
+  }
+
+  .todo-checkbox.checked {
+    border-color: hsl(var(--primary));
+    background: var(--gradient-primary);
+    box-shadow: 0 0 20px hsl(var(--aurora-purple) / 0.4);
+  }
+}
