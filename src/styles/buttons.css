@@ -1,0 +1,56 @@
+@layer components {
+  /* Floating Action Button */
+  .fab-button {
+    @apply rounded-[100px] p-4 text-white;
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .fab-button:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: var(--shadow-lg), 0 0 50px hsl(var(--aurora-purple) / 0.5);
+  }
+
+  .fab-button:active {
+    transform: scale(0.98);
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300;
+    background: var(--gradient-primary);
+  }
+
+  .btn-primary:hover {
+    @apply scale-105;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .btn-secondary {
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-width: 1px;
+    background: hsl(var(--glass-bg));
+    border-color: hsl(var(--glass-border));
+    box-shadow: var(--shadow-md);
+    color: hsl(var(--foreground));
+  }
+
+  .btn-secondary:hover {
+    transform: scale(1.05);
+  }
+
+  .btn-danger {
+    @apply px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300;
+    background: hsl(var(--destructive));
+  }
+
+  .btn-danger:hover {
+    @apply scale-105 opacity-90;
+  }
+}

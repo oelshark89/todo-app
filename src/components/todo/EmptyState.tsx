@@ -12,7 +12,7 @@ export function EmptyState({
   return (
     <div className="flex flex-col items-center justify-center py-16 px-4 animate-fade-in">
       {/* Icon with floating animation */}
-      <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-6 animate-float">
+      <div className="w-20 h-20 rounded-[100px] bg-primary/10 flex items-center justify-center mb-6 animate-float">
         <ClipboardList className="w-10 h-10 text-primary" />
       </div>
 
