@@ -1,26 +1,25 @@
-import { cn } from '../../lib/utils'
+import { cn } from "../../lib/utils";
 
 interface ConfirmDialogProps {
-  title: string
-  message: string
-  confirmLabel?: string
-  cancelLabel?: string
-  onConfirm: () => void
-  onCancel: () => void
-  variant?: 'default' | 'danger'
+  title: string;
+  message: string;
+  confirmLabel?: string;
+  cancelLabel?: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+  variant?: "default" | "danger";
 }
 
 export function ConfirmDialog({
   title,
   message,
-  confirmLabel = 'Confirm',
-  cancelLabel = 'Cancel',
+  confirmLabel = "Confirm",
+  cancelLabel = "Cancel",
   onConfirm,
   onCancel,
-  variant = 'default',
+  variant = "default",
 }: ConfirmDialogProps) {
   return (
-    // Backdrop
     <div
       className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in"
       onClick={onCancel}
@@ -43,14 +42,12 @@ export function ConfirmDialog({
           </button>
           <button
             onClick={onConfirm}
-            className={cn(
-              variant === 'danger' ? 'btn-danger' : 'btn-primary'
-            )}
+            className={cn(variant === "danger" ? "btn-danger" : "btn-primary")}
           >
             {confirmLabel}
           </button>
         </div>
       </div>
     </div>
-  )
+  );
 }
